@@ -5,18 +5,11 @@ class Api::V1::UserGroupsController < ApplicationController
     user = User.find_by(id: params[:id])
     groups = user.user_groups
     filtered = groups.select{|group| group.status === 'pending'}
+    filtered_accept = groups.select{|group| group.status === 'accept'}
+    event_accept = filtered_accept.map{|ug| ug.group}
     event = filtered.map{|ug| ug.group}
     
-    render json: {filtered: filtered, groups: event}
-  end
-
-  def belongs
-    user = User.find_by(id: params[:id])
-    groups = user.user_groups
-    filtered = groups.select{|group| group.status === 'accept'}
-    event = filtered.map{|ug| ug.group}
-
-    render json: event
+    render json: {filtered: filtered, groups: event, accept: event_accept}
   end
 
   def update
