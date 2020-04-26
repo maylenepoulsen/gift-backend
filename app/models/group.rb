@@ -10,7 +10,9 @@ class Group < ApplicationRecord
     group = Group.find_by(id: id)
     members_array.each do |member|
       user = User.find_by(name: member)
-      group.users << user
+      if user
+        group.users << user
+      end
     end
   end
 end

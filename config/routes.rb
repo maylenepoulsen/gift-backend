@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:create, :show]
-      resources :groups, only: [:create]
+      resources :groups, only: [:create, :show]
+      resources :user_groups, only: [:update, :destroy]
+      get '/invites/:id', to: 'user_groups#invite'
+      get '/belongs/:id', to: 'user_groups#belongs'
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
     end

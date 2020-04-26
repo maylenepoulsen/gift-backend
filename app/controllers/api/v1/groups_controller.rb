@@ -9,8 +9,9 @@ class Api::V1::GroupsController < ApplicationController
       category_id: category_id
     )
     
-    byebug
     new_group.add_users(params[:members], new_group.id)
- 
+  end
+
+  def show
   end
 end
