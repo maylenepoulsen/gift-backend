@@ -20,5 +20,7 @@ class Api::V1::UserGroupsController < ApplicationController
   end
 
   def destroy
+    user_group = UserGroup.find_by(id: params[:id])
+    user_group.destroy
   end
 end
