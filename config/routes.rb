@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :show]
       resources :groups, only: [:create, :show]
       resources :user_groups, only: [:update, :destroy]
+      resource :recipients, only: [:create]
       get '/invites/:id', to: 'user_groups#invite'
      
       post '/login', to: 'auth#create'

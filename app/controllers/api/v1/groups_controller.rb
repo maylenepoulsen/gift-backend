@@ -10,8 +10,14 @@ class Api::V1::GroupsController < ApplicationController
     )
     
     new_group.add_users(params[:members], new_group.id)
+
+    render json: new_group
   end
 
   def show
+    group = Group.find_by(id: params[:id])
+    users = group.users
+    recipients = group.recipients
+    render json: {group: group, members: users, recipients: recipients}
   end
 end

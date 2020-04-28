@@ -8,8 +8,9 @@ class Api::V1::UserGroupsController < ApplicationController
     filtered_accept = groups.select{|group| group.status === 'accept'}
     event_accept = filtered_accept.map{|ug| ug.group}
     event = filtered.map{|ug| ug.group}
+    admin_groups = Group.where(admin_user_id: user.id)
     
-    render json: {filtered: filtered, groups: event, accept: event_accept}
+    render json: {filtered: filtered, groups: event, accept: event_accept, admin_groups: admin_groups}
   end
 
   def update
