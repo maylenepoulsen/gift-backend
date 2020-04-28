@@ -14,10 +14,24 @@ class Api::V1::GroupsController < ApplicationController
     render json: new_group
   end
 
+  def posts
+   post = Post.create(
+    body: params[:body],
+    date: params[:date],
+    user_id: params[:user_id],
+    group_id: params[:group_id]
+   )  
+   render json: post
+  end
+
   def show
     group = Group.find_by(id: params[:id])
     users = group.users
     recipients = group.recipients
-    render json: {group: group, members: users, recipients: recipients}
+    posts = group.posts
+    gifts = []
+    recipients.each {|recipient| gifts << recipient.gifts}
+    
+    render json: {group: group, members: users, recipients: recipients, gifts: gifts, posts: posts}
   end
 end

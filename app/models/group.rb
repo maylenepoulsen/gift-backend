@@ -15,4 +15,5 @@ class Group < ApplicationRecord
       end
     end
   end
+
 end
