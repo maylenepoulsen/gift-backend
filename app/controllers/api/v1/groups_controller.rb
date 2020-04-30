@@ -18,6 +18,7 @@ class Api::V1::GroupsController < ApplicationController
    post = Post.create(
     body: params[:body],
     date: params[:date],
+    name: params[:name],
     user_id: params[:user_id],
     group_id: params[:group_id]
    )  
