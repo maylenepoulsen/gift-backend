@@ -27,7 +27,9 @@ class Api::V1::GroupsController < ApplicationController
 
   def show
     group = Group.find_by(id: params[:id])
-    users = group.users
+    users = []
+    usergroups = UserGroup.where(group_id: params[:id]).select{|ug| ug.status === 'accept'}
+    usergroups.each{|ug| users << User.find_by(id: ug.user_id)}
     recipients = group.recipients
     posts = group.posts
     gifts = []
