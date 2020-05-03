@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   before_action :authorized
 
   def encode_token(payload)
+    #when a user logs in it uses this method to get the token
     JWT.encode(payload, 'my_s3cr3t')
   end
 
@@ -9,7 +10,7 @@ class ApplicationController < ActionController::API
     request.headers['Authorization']
   end
 
-  def decoded_token(token)
+  def decoded_token
     if auth_header
         token = auth_header.split(' ')[1]
         begin

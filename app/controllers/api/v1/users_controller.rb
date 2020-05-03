@@ -2,6 +2,7 @@ class Api::V1::UsersController < ApplicationController
 skip_before_action :authorized, only: [:create]
 
 def create
+  #this is for sign-up
  @user = User.create(user_params)
 
   if @user.valid?
@@ -13,9 +14,17 @@ def create
 end
 
 def show
-  user = User.find_by(id: params[:id])
-  render json: user
+  # user = User.find_by(id: params[:id])
+  # render json: user
+  token = request.headers['Authorization']
+  user = User.find_by(id: token)
+  if logged_in?
+    render json: { id: current_user.id, name: current_user.name}
+  else
+    render json: {error: 'No user could be found'} status: 401
+  end
 end
+
 
 def profile
   render json: { user: current_user }, status: :accepted

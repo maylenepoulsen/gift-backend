@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post '/posts', to: 'groups#posts'
 
       get '/likes/:id', to: 'gifts#get_likes'
+      post '/likes/:id', to: 'gifts#create_likes'
       patch '/likes/:id', to: 'gifts#update_likes'
      
       post '/login', to: 'auth#create'

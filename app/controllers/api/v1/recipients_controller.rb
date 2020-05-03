@@ -1,5 +1,5 @@
 class Api::V1::RecipientsController < ApplicationController
-  skip_before_action :authorized
+  #skip_before_action :authorized
 
   def create
     group = Group.find_by(id: params[:group][:id])
