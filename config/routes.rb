@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       
       get '/invites/:id', to: 'user_groups#invite'
       post '/posts', to: 'groups#posts'
+
+      get '/likes/:id', to: 'gifts#get_likes'
+      patch '/likes/:id', to: 'gifts#update_likes'
      
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
