@@ -10,6 +10,7 @@ class Api::V1::GiftsController < ApplicationController
         notes: params[:notes],
         recipient_id: params[:recipient_id]
     )
+    render json: gift
   end
 
   def get_likes
