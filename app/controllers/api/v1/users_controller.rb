@@ -14,15 +14,16 @@ def create
 end
 
 def show
-  # user = User.find_by(id: params[:id])
-  # render json: user
+  user = User.find_by(id: params[:id])
+  render json: user
   token = request.headers['Authorization']
   user = User.find_by(id: token)
   if logged_in?
     render json: { id: current_user.id, name: current_user.name}
   else
-    render json: {error: 'No user could be found'} status: 401
+    render json: {error: 'No user could be found'}, status: 401
   end
+
 end
 
 
