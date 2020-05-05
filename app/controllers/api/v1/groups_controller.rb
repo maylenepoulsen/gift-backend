@@ -27,6 +27,7 @@ class Api::V1::GroupsController < ApplicationController
 
   def show
     group = Group.find_by(id: params[:id])
+    admin = User.find_by(id: group.admin_user_id)
     users = []
     usergroups = UserGroup.where(group_id: params[:id]).select{|ug| ug.status === 'accept'}
     usergroups.each{|ug| users << User.find_by(id: ug.user_id)}
@@ -35,6 +36,6 @@ class Api::V1::GroupsController < ApplicationController
     gifts = []
     recipients.each {|recipient| gifts << recipient.gifts}
     
-    render json: {group: group, members: users, recipients: recipients, gifts: gifts, posts: posts}
+    render json: {group: group, members: users, recipients: recipients, gifts: gifts, posts: posts, admin: admin}
   end
 end
